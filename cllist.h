@@ -32,8 +32,8 @@ NODE* insert_prev(HLLIST hllist, NODE* node, DATATYPE val);
 NODE* insertp_prev(HLLIST hllist, NODE* node, const DATATYPE *val);
 void remove_node(HLLIST hllist, NODE* node);
 DATATYPE *getp_item(HLLIST hlllist, size_t index);
-bool walk_llist(HLLIST hllist, bool (*proc)(NODE *));
-bool walk_llist_rev(HLLIST hllist, bool (*proc)(NODE *));
+bool walk_llist(HLLIST hllist, bool (*proc)(DATATYPE *));
+bool walk_llist_rev(HLLIST hllist, bool (*proc)(DATATYPE *));
 void clear_llist(HLLIST hllist);
 void destroy_llist(HLLIST hllist);
 /*Inline Function Definitions*/

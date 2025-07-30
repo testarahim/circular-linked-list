@@ -3,7 +3,7 @@
 #include "cllist.h"
 
 /*Static Function Declarations*/
-static bool disp(NODE *);
+static bool disp(DATATYPE *);
 /*Function Definitions*/
 
 HLLIST create_llist(void)
@@ -141,7 +141,7 @@ DATATYPE *getp_item(HLLIST hlllist, size_t index)
     return &node->val;
 }
 
-bool walk_llist(HLLIST hllist, bool (*proc)(NODE *))
+bool walk_llist(HLLIST hllist, bool (*proc)(DATATYPE *))
 {
     bool retval = true;
     bool def_flag = false;
@@ -151,7 +151,7 @@ bool walk_llist(HLLIST hllist, bool (*proc)(NODE *))
         def_flag = true;
     }
     for(NODE* node = hllist->head.next; node != &hllist->head; node = node->next)
-        if(!proc(node)){
+        if(!proc(&node->val)){
             retval = false;
             break;
         }
@@ -162,7 +162,7 @@ bool walk_llist(HLLIST hllist, bool (*proc)(NODE *))
     return retval;
 }
 
-bool walk_llist_rev(HLLIST hllist, bool (*proc)(NODE *))
+bool walk_llist_rev(HLLIST hllist, bool (*proc)(DATATYPE *))
 {
     bool retval = true;
     bool def_flag = false;
@@ -173,7 +173,7 @@ bool walk_llist_rev(HLLIST hllist, bool (*proc)(NODE *))
     }
     
     for(NODE* node = hllist->head.prev; node != &hllist->head; node = node->prev)
-        if(!proc(node)){
+        if(!proc(&node->val)){
             retval = false;
             break;
         }
@@ -213,8 +213,8 @@ void destroy_llist(HLLIST hllist)
     free(hllist);
 }
 
-static bool disp(NODE *node){
-    printf("%d ", node->val);
+static bool disp(DATATYPE* val){
+    printf("%d ", *val);
     fflush(stdout);
 
     return true;
